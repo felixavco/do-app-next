@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link'
+import Template from '../components/Template';
 import './index.scss';
 
 const about = () => {
 
   return (
-    <div>
+    <Template>
       <Head>
         <link rel="icon" href="/static/favicon.ico" />
         <title>My next jsx page</title>
@@ -14,7 +15,7 @@ const about = () => {
       <Link href="/">
         <a>Home</a>
       </Link>
-    </div>
+    </Template>
   )
 }
 
