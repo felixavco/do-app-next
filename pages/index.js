@@ -2,8 +2,9 @@ import Head from 'next/head';
 import Link from 'next/link'
 import Template from '../components/Template';
 import './index.scss'
+import { connect } from 'react-redux';
 
-const index = () => {
+const index = (props) => {
 
   return (
     <Template>
@@ -15,8 +16,14 @@ const index = () => {
       <Link href="/about">
         <a>About</a>
       </Link>
+      <h2>Error: {props.error}</h2>
     </Template>
   )
 }
 
-export default index
+const mapStateToProps = (state) => ({
+  error: state.errors.globalError
+})
+
+export default connect(mapStateToProps, {})(index)
+// export default index;
