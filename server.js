@@ -11,6 +11,9 @@ app
     .then(() => {
         const server = express();
 
+        //* Serve static assets
+        server.use(express.static('static'));
+
         server.get('*', (req, res) => {
             return handle(req, res);
         })
