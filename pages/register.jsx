@@ -5,11 +5,11 @@ import { Steps } from 'primereact/steps';
 
 const register = () => {
 
-    const [activeIndex, SetActiveIndex] = useState(1)
+    const [activeIndex, SetActiveIndex] = useState(0)
 
     const items = [
         {
-            label: 'Datos Personales',
+            label: 'Registro',
             command: (event) => {
                 console.log("HOLA")
             }
