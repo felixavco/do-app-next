@@ -13,7 +13,7 @@
         list-style: none;
     }
 
-    &_password-input {
+    ._password-input, ._form-email-input-cont {
         position: relative;
 
         span {
@@ -23,4 +23,12 @@
             margin: 0.5rem 0.5rem 0 0;
         }
     }
+
+    .btn-container {
+        .disabled-btn {
+            background: #a3a3a3;
+            border-color: #a3a3a3;
+        }
+    }
+
 }

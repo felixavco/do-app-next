@@ -1,34 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { API_URL } from '../../config/config';
-import axios from 'axios';
 import { isEmpty } from '../../utils/utils';
 import { inputError, inputSuccess, msgError, msgSuccess } from './messageStyles';
+import { connect } from 'react-redux';
+import { isEmailAvailable } from '../../redux/actions/authActions';
 
-function EmailInput({ email, setEmail, emailMessage, setEmailMessage, placeholder, label }) {
-	const [ isLoading, setIsLoading ] = useState(false);
+function EmailInput(props) {
+	const { email, setEmail, emailMessage, setEmailMessage, placeholder, errors } = props
+	const [isLoading, setIsLoading] = useState(false);
 
-	useEffect(
-		() => {
-			if (validateEmail(email)) {
-				isEmailAvailable(email);
-			}
-		},
-		[ email ]
-	);
+	useEffect(() => {
+		if (validateEmail(email)) {
+			checkEmail(email);
+		}
+	}, [email]);
+
+
+	useEffect(() => {
+		if (errors.checkEmail) {
+			setEmailMessage({ text: errors.checkEmail, error: true, animation: true });
+		} else {
+			setEmailMessage({ text: null, error: false, animation: false });
+		}
+		setIsLoading(false);
+
+	}, [errors])
 
 	//* Makes a request to the backend to check if the email address has been already registered
-	const isEmailAvailable = async (email) => {
+	const checkEmail = (email) => {
 		setIsLoading(true);
-		try {
-			const res = await axios.post(API_URL + '/user/check-email', { email });
-			setEmailMessage({ text: res.data.message, error: false, animation: false });
-			setIsLoading(false);
-		} catch (err) {
-			const { email } = err.response.data;
-			setEmailMessage({ text: email, error: true, animation: true });
-			setIsLoading(false);
-		}
+		props.isEmailAvailable({ email })
 	};
 
 	const validateEmail = (email_val) => {
@@ -45,7 +46,7 @@ function EmailInput({ email, setEmail, emailMessage, setEmailMessage, placeholde
 	};
 
 	let emailSpinner;
-	if(isLoading) {
+	if (isLoading) {
 		emailSpinner = <i className="fas fa-spinner fa-pulse" />
 	} else {
 		emailSpinner = null
@@ -56,7 +57,7 @@ function EmailInput({ email, setEmail, emailMessage, setEmailMessage, placeholde
 			{/* <label htmlFor="email" style={emailMessage.error ? msgError : null}>
 				{label}
 			</label> */}
-			<div className="Register_form-email-input-cont">
+			<div className="_form-email-input-cont">
 				<input
 					style={emailMessage.error ? inputError : email === '' ? null : inputSuccess}
 					type="text"
@@ -69,7 +70,7 @@ function EmailInput({ email, setEmail, emailMessage, setEmailMessage, placeholde
 					onChange={(e) => setEmail(e.target.value.trim().toLowerCase())}
 					onBlur={onEmailBlur}
 				/>
-				<span>{ emailSpinner }</span>
+				<span>{emailSpinner}</span>
 			</div>
 			<small className="form-text" style={emailMessage.error ? msgError : email === '' ? null : msgSuccess}>
 				{emailMessage.text}
@@ -79,12 +80,16 @@ function EmailInput({ email, setEmail, emailMessage, setEmailMessage, placeholde
 }
 
 EmailInput.propTypes = {
-    placeholder: PropTypes.string,
-    label: PropTypes.string,
+	placeholder: PropTypes.string,
+	label: PropTypes.string,
 	email: PropTypes.string.isRequired,
 	setEmail: PropTypes.func.isRequired,
 	emailMessage: PropTypes.object.isRequired,
 	setEmailMessage: PropTypes.func.isRequired
 };
 
-export default EmailInput;
+const mapStateToProps = (state) => ({
+	errors: state.errors
+});
+
+export default connect(mapStateToProps, { isEmailAvailable })(EmailInput);

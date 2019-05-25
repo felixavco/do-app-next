@@ -1,9 +1,7 @@
 
 import { GET_ERRORS } from '../types';
 
-const initialState = {
-    globalError: "error al accceder al dispositivo"
-}
+const initialState = {}
 
 export default (state = initialState, action) => {
     switch (action.type) {

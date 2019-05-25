@@ -163,7 +163,7 @@ function PasswordInput({
 					</li>
 				</ul>
 
-				<div className="register_password-input">
+				<div className="_password-input">
 					<input
 						style={passwordMessage.error ? inputError : password === '' ? null : inputSuccess}
 						type={showPassword ? 'text' : 'password'}
@@ -172,7 +172,7 @@ function PasswordInput({
 						placeholder="Ingrese una contraseña segura"
 						password="password"
 						value={password}
-						onChange={(e) => setPassword(e.target.value)}
+						onChange={(e) => setPassword(e.target.value.trim())}
 						onBlur={onBlurPassword}
 						autoComplete="false"
 					/>
@@ -192,7 +192,7 @@ function PasswordInput({
 			{/*<label htmlFor="confirPwd" style={confirPwdMessage.error ? msgError : null}>
 					Confirm your password
 				</label> */}
-				<div className="register_password-input">
+				<div className="_password-input">
 					<input
 						// disabled={!confirmField}
 						style={confirPwdMessage.error ? inputError : confirPwd === '' ? null : inputSuccess}
@@ -200,7 +200,7 @@ function PasswordInput({
 						id="confirPwd"
 						value={confirPwd}
 						className={`form-control animated faster ${confirPwdMessage.animation ? 'shake' : ''}`}
-						onChange={(e) => setConfirPwd(e.target.value)}
+						onChange={(e) => setConfirPwd(e.target.value.trim())}
 						onBlur={onBlurConfirPwd}
 						placeholder="Confirme la contraseña"
 						autoComplete="false"
