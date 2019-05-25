@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Layout from '../components/Layout';
 import StepOne from '../components/auth/Register_step_one';
 import { Steps } from 'primereact/steps';
-import './scss/register.scss';
+import './scss/app.scss';
 
 const register = () => {
 
