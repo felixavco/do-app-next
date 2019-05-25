@@ -5,7 +5,7 @@ import axios from 'axios';
 import { isEmpty } from '../../utils/utils';
 import { inputError, inputSuccess, msgError, msgSuccess } from './messageStyles';
 
-function EmailInput({ email, setEmail, emailMessage, setEmailMessage }) {
+function EmailInput({ email, setEmail, emailMessage, setEmailMessage, placeholder, label }) {
 	const [ isLoading, setIsLoading ] = useState(false);
 
 	useEffect(
@@ -53,9 +53,9 @@ function EmailInput({ email, setEmail, emailMessage, setEmailMessage }) {
 
 	return (
 		<div className="form-group">
-			<label htmlFor="email" style={emailMessage.error ? msgError : null}>
-				Email address
-			</label>
+			{/* <label htmlFor="email" style={emailMessage.error ? msgError : null}>
+				{label}
+			</label> */}
 			<div className="Register_form-email-input-cont">
 				<input
 					style={emailMessage.error ? inputError : email === '' ? null : inputSuccess}
@@ -63,7 +63,7 @@ function EmailInput({ email, setEmail, emailMessage, setEmailMessage }) {
 					className={`form-control animated faster ${emailMessage.animation ? 'shake' : ''}`}
 					onAnimationEnd={() => setEmailMessage({ ...emailMessage, animation: false })}
 					id="email"
-					placeholder="Enter email"
+					placeholder={placeholder}
 					name="email"
 					value={email}
 					onChange={(e) => setEmail(e.target.value.trim().toLowerCase())}
@@ -79,6 +79,8 @@ function EmailInput({ email, setEmail, emailMessage, setEmailMessage }) {
 }
 
 EmailInput.propTypes = {
+    placeholder: PropTypes.string,
+    label: PropTypes.string,
 	email: PropTypes.string.isRequired,
 	setEmail: PropTypes.func.isRequired,
 	emailMessage: PropTypes.object.isRequired,
