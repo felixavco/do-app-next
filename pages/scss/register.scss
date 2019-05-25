@@ -1,0 +1,26 @@
+.register {
+    input { 
+        text-align: center;
+        border: 1px solid #a3a3a3;
+    }
+
+    select {
+        border: 1px solid #a3a3a3;
+    }
+
+    ul {
+        font-size: 0.85rem;
+        list-style: none;
+    }
+
+    &_password-input {
+        position: relative;
+
+        span {
+            position: absolute;
+            right: 0;
+            top: 0;
+            margin: 0.5rem 0.5rem 0 0;
+        }
+    }
+}

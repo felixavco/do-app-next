@@ -91,13 +91,13 @@ function PasswordInput({
 
 		if (!isLength || !isUpper || !isNumber || !isSpecialChar) {
 			setPasswordMessage({
-				text: "Your password doesn't meet all the requirements",
+				text: "La contraseña no cumple todos los requisitos.",
 				error: true,
 				animation: true
 			});
 			setConfirmField(false);
 		} else if (isEmpty(password)) {
-			setPasswordMessage({ text: 'Password is required!', error: true, animation: true });
+			setPasswordMessage({ text: 'Ingrese una contraseña.', error: true, animation: true });
 			setConfirmField(false);
 		} else {
 			setPasswordMessage({ text: '', error: false, animation: false });
@@ -110,7 +110,7 @@ function PasswordInput({
 		() => {
 			if (confirPwd.length >= password.length) {
 				if (!comparePassword(password, confirPwd)) {
-					setConfirPwdMessage({ text: "Passwords don't match", error: true, animation: true });
+					setConfirPwdMessage({ text: "Las contraseñas no coinciden.", error: true, animation: true });
 				} else {
 					setConfirPwdMessage({ text: '', error: false, animation: false });
 				}
@@ -124,12 +124,12 @@ function PasswordInput({
 	const onBlurConfirPwd = () => {
 		if (!isEmpty(confirPwd)) {
 			if (!comparePassword(password, confirPwd)) {
-				setConfirPwdMessage({ text: "Passwords don't match", error: true, animation: true });
+				setConfirPwdMessage({ text: "Las contraseñas no coinciden.", error: true, animation: true });
 			} else {
 				setConfirPwdMessage({ text: '', error: false, animation: false });
 			}
 		} else {
-			setConfirPwdMessage({ text: 'Password confirmation is required!', error: true, animation: true });
+			setConfirPwdMessage({ text: 'Confirme la contraseña', error: true, animation: true });
 		}
 	};
 
@@ -142,10 +142,9 @@ function PasswordInput({
 		<Fragment>
 			<div className="form-group">
 				<ul>
-                    <li>La contrasena debe tener: </li>
 					<li style={isLength ? msgSuccess : {}}>
 						{isLength ? success : fail}
-						&nbsp; Entre 8 a 30 caracteres
+						&nbsp; La contraseña debe tener entre 8 a 30 caracteres
 					</li>
 
 					<li style={isUpper ? msgSuccess : {}}>
@@ -164,7 +163,7 @@ function PasswordInput({
 					</li>
 				</ul>
 
-				<div className="Register_password-input">
+				<div className="register_password-input">
 					<input
 						style={passwordMessage.error ? inputError : password === '' ? null : inputSuccess}
 						type={showPassword ? 'text' : 'password'}
@@ -193,7 +192,7 @@ function PasswordInput({
 			{/*<label htmlFor="confirPwd" style={confirPwdMessage.error ? msgError : null}>
 					Confirm your password
 				</label> */}
-				<div className="Register_password-input">
+				<div className="register_password-input">
 					<input
 						// disabled={!confirmField}
 						style={confirPwdMessage.error ? inputError : confirPwd === '' ? null : inputSuccess}

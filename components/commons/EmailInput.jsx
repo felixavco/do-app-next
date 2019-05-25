@@ -38,9 +38,9 @@ function EmailInput({ email, setEmail, emailMessage, setEmailMessage, placeholde
 
 	const onEmailBlur = () => {
 		if (isEmpty(email)) {
-			setEmailMessage({ text: 'Email is required!', error: true, animation: true });
+			setEmailMessage({ text: 'Ingrese su correo.', error: true, animation: true });
 		} else if (!validateEmail(email)) {
-			setEmailMessage({ text: 'Invalid email format!', error: true, animation: true });
+			setEmailMessage({ text: 'El formato del correo es incorrecto.', error: true, animation: true });
 		}
 	};
 
