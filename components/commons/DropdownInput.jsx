@@ -3,7 +3,7 @@ import { isEmpty } from '../../utils/utils';
 import { inputError, inputSuccess, msgError, msgSuccess } from './messageStyles';
 
 
-const DropdownInput = ({ options, selectMessage, setSelectMessage, account_type, setAccount_type }) => {
+const DropdownInput = ({ options, selectMessage, setSelectMessage, account_type, setAccount_type, label }) => {
     const selectOptions = options.map((e, i) => <option key={i} value={e.value}>{e.label}</option>)
 
     const onSelectBlur = (e) => {
@@ -14,9 +14,14 @@ const DropdownInput = ({ options, selectMessage, setSelectMessage, account_type,
         }
     }
 
+    let labelElement = null;
+    if(!isEmpty(label)) {
+        labelElement = <label htmlFor="DropdownInput">{label}</label>
+    }
+
     return (
         <div className="form-group">
-            { /* <label htmlFor="DropdownInput">{label}</label> */}
+            { labelElement }
             <select
                 onBlur={onSelectBlur}
                 className="form-control"

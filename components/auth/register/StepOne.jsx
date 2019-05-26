@@ -9,7 +9,7 @@ import EmailInput from '../../commons/EmailInput';
 import PasswordInput from '../../commons/PasswordInput';
 //* Redux
 import { connect } from 'react-redux';
-import { register } from '../../../redux/actions/authActions';
+import { register_login } from '../../../redux/actions/authActions';
 
 
 const StepOne = (props) => {
@@ -50,7 +50,7 @@ const StepOne = (props) => {
         [selectMessage, emailMessage, passwordMessage, confirPwdMessage, account_type, password, email, confirPwd, isHuman]
     );
 
-    //* button content 
+    //* button content
     let button_content;
     if (isSending) {
         button_content = (
@@ -70,7 +70,8 @@ const StepOne = (props) => {
         e.preventDefault()
         setIsSending(true)
         const newUser = { account_type, email, password, password2: confirPwd }
-        props.register(newUser);
+        //* Call function to register user
+        props.register_login(newUser);
         setTimeout(() => {
             setIsSending(false);
         }, 500);
@@ -127,4 +128,4 @@ const StepOne = (props) => {
     )
 }
 
-export default connect(null, { register })(StepOne)
+export default connect(null, { register_login })(StepOne)

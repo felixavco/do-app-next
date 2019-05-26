@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 
 const register = ({isAuthenticated}) => {
 
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeIndex, setActiveIndex] = useState(1)
 
     useEffect(() => {
         if(isAuthenticated) {
@@ -31,7 +31,7 @@ const register = ({isAuthenticated}) => {
         <Layout>
             <section className="register">
                 <div className="container-fluid">
-                    <Steps elements={items} activeElement={activeIndex} />    
+                    <Steps elements={items} activeElement={activeIndex} />
                     <div style={{display: activeIndex === 0 ? 'block' : 'none'}} className="step_one">
                         <StepOne />
                     </div>

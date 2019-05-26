@@ -4,44 +4,44 @@ import { isEmpty, capitalize} from '../../utils/utils';
 import { inputError, inputSuccess, msgError, msgSuccess } from './messageStyles';
 
 function TextInput({
-	textValue,
-	setTextValue,
+	value,
+	setValue,
 	message,
 	setMessage,
 	placeholder,
-	inputName,
+	name,
 	isEmptyErrMsg,
 	lengthValErrMsg,
 	length,
 	capitalizeInput = false,
 	textArea = false
 }) {
-	useEffect(
-		() => {
-			if (textValue.length > length.min || textValue.length < length.max) {
-				setMessage({ text: '', error: false, animation: false });
-			} else {
-				setMessage({ text: lengthValErrMsg, error: true, animation: true });
-			}
-		},
-		[textValue]
-	);
+	// useEffect(
+	// 	() => {
+	// 		if (value.length > length.min || value.length < length.max) {
+	// 			setMessage({ text: '', error: false, animation: false });
+	// 		} else {
+	// 			setMessage({ text: lengthValErrMsg, error: true, animation: true });
+	// 		}
+	// 	},
+	// 	[value]
+	// );
 
 	const onNameBlur = () => {
-		if (isEmpty(textValue)) {
-			setMessage({ text: isEmptyErrMsg, error: true, animation: true });
-		} else if (textValue.length < length.min || textValue.length > length.max) {
-			setMessage({ text: lengthValErrMsg, error: true, animation: true });
-		} else {
-			setMessage({ text: '', error: false, animation: false });
-		}
+		// if (isEmpty(value)) {
+		// 	setMessage({ text: isEmptyErrMsg, error: true, animation: true });
+		// } else if (value.length < length.min || value.length > length.max) {
+		// 	setMessage({ text: lengthValErrMsg, error: true, animation: true });
+		// } else {
+		// 	setMessage({ text: '', error: false, animation: false });
+		// }
 	};
 
 	const onChangeHandler = e => {
 		if (capitalizeInput) {
-			setTextValue(e.target.value.split(' ').map(n => capitalize(n)).join(' '));
+			setValue(e.target.value.split(' ').map(n => capitalize(n)).join(' '));
 		} else {
-			setTextValue(e.target.value);
+			setValue(e.target.value);
 		}
 	};
 
@@ -51,15 +51,15 @@ function TextInput({
 		content = (
 			<div className="form-group">
 				<textarea
-					style={message.error ? inputError : textValue === '' ? null : inputSuccess}
+					style={message.error ? inputError : value === '' ? null : inputSuccess}
 					className={`form-control animated  ${message.animation ? null : ''}`}
-					id={textValue}
-					value={textValue}
+					id={value}
+					value={value}
 					placeholder={placeholder}
 					onChange={e => onChangeHandler(e)}
 					onBlur={onNameBlur}
 				/>
-				<small className="form-text" style={message.error ? msgError : textValue === '' ? null : msgSuccess}>
+				<small className="form-text" style={message.error ? msgError : value === '' ? null : msgSuccess}>
 					{message.text}
 				</small>
 			</div>
@@ -68,17 +68,17 @@ function TextInput({
 		content = (
 			<div className="form-group">
 				<input
-					style={message.error ? inputError : textValue === '' ? null : inputSuccess}
+					style={message.error ? inputError : value === '' ? null : inputSuccess}
 					type="text"
 					className={`form-control animated ${message.animation ? null : ''}`}
 					onAnimationEnd={() => setMessage({ ...message, animation: false })}
 					placeholder={placeholder}
-					name={inputName}
-					value={textValue}
+					name={name}
+					value={value}
 					onChange={e => onChangeHandler(e)}
 					onBlur={onNameBlur}
 				/>
-				<small className="form-text" style={message.error ? msgError : textValue === '' ? null : msgSuccess}>
+				<small className="form-text" style={message.error ? msgError : value === '' ? null : msgSuccess}>
 					{message.text}
 				</small>
 			</div>
@@ -89,12 +89,12 @@ function TextInput({
 }
 
 TextInput.propTypes = {
-	textValue: PropTypes.string.isRequired,
+	value: PropTypes.string.isRequired,
 	message: PropTypes.object.isRequired,
-	setTextValue: PropTypes.func.isRequired,
+	setValue: PropTypes.func.isRequired,
 	setMessage: PropTypes.func.isRequired,
 	placeholder: PropTypes.string,
-	inputName: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
 	isEmptyErrMsg: PropTypes.string.isRequired,
 	lengthValErrMsg: PropTypes.string.isRequired,
 	length: PropTypes.object,

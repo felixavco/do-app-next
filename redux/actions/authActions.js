@@ -4,10 +4,16 @@ import { setAuthToken } from '../../utils/utils'
 import { API_URL } from '../../config/config';
 import { GET_ERRORS, SET_CURRENT_USER } from '../types'
 
-//* Registers the user and stores the token
-export const register = (newUser) => (dispatch) => {
+//* Registers the user and stores the token || Login existing users
+export const register_login = (newUser, login = false) => (dispatch) => {
+    let URL = API_URL + '/api/user/register';
+
+    if(login) {
+        URL = API_URL + '/api/user/login'
+    }
+
     axios
-        .post(API_URL + "/api/user/register", newUser)
+        .post(URL, newUser)
         .then((res) => {
             //* Save token to local storage
             const { token } = res.data;
@@ -20,7 +26,6 @@ export const register = (newUser) => (dispatch) => {
                 type: SET_CURRENT_USER,
                 payload: decodedUser
             })
-
         })
         .catch((error) => {
             dispatch({
@@ -30,6 +35,7 @@ export const register = (newUser) => (dispatch) => {
         })
 }
 
+
 //* Checks if an email is available
 export const isEmailAvailable = (email) => (dispatch) => {
     axios
@@ -37,14 +43,14 @@ export const isEmailAvailable = (email) => (dispatch) => {
         .then((res) => {
             console.log(res.data.message)
             dispatch({
-                type: GET_ERRORS, 
+                type: GET_ERRORS,
                 payload: {}
             })
         })
         .catch((error) => {
             console.error(error.response.data)
             dispatch({
-                type: GET_ERRORS, 
+                type: GET_ERRORS,
                 payload: error.response.data
             })
         })
