@@ -1,35 +1,47 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
-import StepOne from '../components/auth/Register_step_one';
-import { Steps } from 'primereact/steps';
 import './scss/register.scss';
 
+//* Steps components
+import Steps  from '../components/commons/Steps';
+import StepOne from '../components/auth/register/StepOne';
+import StepTwo from '../components/auth/register/StepTwo';
+import StepThree from '../components/auth/register/StepThree';
+//* Redux
+import { connect } from 'react-redux';
 
 
+const register = ({isAuthenticated}) => {
 
-const register = () => {
+    const [activeIndex, setActiveIndex] = useState(0)
 
-    const [activeIndex, SetActiveIndex] = useState(0)
+    useEffect(() => {
+        if(isAuthenticated) {
+            setActiveIndex(1)
+        }
+    }, [isAuthenticated])
 
     const items = [
-        {
-            label: 'Registro',
-            command: (event) => {
-                console.log("HOLA")
-            }
-        },
-        { label: 'Contacto' },
-        { label: 'Perfil' },
-        { label: 'Clinica' }
+        { label: 'Registro' },
+        { label: 'Informacion Personal' },
+        { label: 'Clinica' },
     ];
 
     return (
         <Layout>
             <section className="register">
                 <div className="container-fluid">
-                    <Steps model={items} activeIndex={activeIndex} onSelect={(e) => SetActiveIndex(e.index)} readOnly={false} />
-                    <div className="step_one">
+                    <Steps elements={items} activeElement={activeIndex} />    
+                    <div style={{display: activeIndex === 0 ? 'block' : 'none'}} className="step_one">
                         <StepOne />
+                    </div>
+
+                    <div style={{display: activeIndex === 1 ? 'block' : 'none'}} className="step_two">
+                        <StepTwo />
+                    </div>
+
+                    <div style={{display: activeIndex === 2 ? 'block' : 'none'}} className="step_three">
+                        <StepThree />
                     </div>
                 </div>
             </section>
@@ -37,4 +49,8 @@ const register = () => {
     )
 }
 
-export default register
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+})
+
+export default connect(mapStateToProps, {})(register)

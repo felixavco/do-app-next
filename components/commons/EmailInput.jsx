@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link'
 import PropTypes from 'prop-types';
 import { isEmpty } from '../../utils/utils';
 import { inputError, inputSuccess, msgError, msgSuccess } from './messageStyles';
@@ -15,6 +16,13 @@ function EmailInput(props) {
 		}
 	}, [email]);
 
+	const loginLink = (
+		<Link href="/login">
+			<a>
+				Iniciar sesión?
+			</a>
+		</Link>
+	)
 
 	useEffect(() => {
 		if (errors.checkEmail) {
@@ -73,7 +81,8 @@ function EmailInput(props) {
 				<span>{emailSpinner}</span>
 			</div>
 			<small className="form-text" style={emailMessage.error ? msgError : email === '' ? null : msgSuccess}>
-				{emailMessage.text}
+				{emailMessage.text} 
+				{emailMessage.text === 'Este correo ya esta registrado' ?  loginLink : ''}
 			</small>
 		</div>
 	);

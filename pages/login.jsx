@@ -1,6 +1,7 @@
 import Layout from '../components/Layout';
 
-const login = () => {
+const login = (props) => {
+    console.log(props)
     return (
         <Layout>
             <div className="container">

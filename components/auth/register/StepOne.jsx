@@ -1,18 +1,18 @@
 import { useState, useEffect, Fragment } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { site_key } from '../../config/config';
-import { account_types } from '../../config/dropdown_data';
-import { isEmpty } from '../../utils/utils';
+import { site_key } from '../../../config/config';
+import { account_types } from '../../../config/dropdown_data';
+import { isEmpty } from '../../../utils/utils';
 //* Custom components
-import DropdownInput from '../commons/DropdownInput';
-import EmailInput from '../commons/EmailInput';
-import PasswordInput from '../commons/PasswordInput';
+import DropdownInput from '../../commons/DropdownInput';
+import EmailInput from '../../commons/EmailInput';
+import PasswordInput from '../../commons/PasswordInput';
 //* Redux
 import { connect } from 'react-redux';
-import { register } from '../../redux/actions/authActions';
+import { register } from '../../../redux/actions/authActions';
 
 
-const Register_step_one = (props) => {
+const StepOne = (props) => {
 
     //* account type State
     const [account_type, setAccount_type] = useState('');
@@ -127,4 +127,4 @@ const Register_step_one = (props) => {
     )
 }
 
-export default connect(null, { register })(Register_step_one)
+export default connect(null, { register })(StepOne)
