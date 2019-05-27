@@ -3,7 +3,7 @@ import { isEmpty } from '../../utils/utils';
 import { inputError, inputSuccess, msgError, msgSuccess } from './messageStyles';
 
 
-const DropdownInput = ({ options, selectMessage, setSelectMessage, value, onchange, label }) => {
+const DropdownInput = ({ options, selectMessage, setSelectMessage, value, onchange, label, className }) => {
     const selectOptions = options.map((e, i) => <option key={i} value={e.value}>{e.label}</option>)
 
     const onSelectBlur = (e) => {
@@ -24,8 +24,7 @@ const DropdownInput = ({ options, selectMessage, setSelectMessage, value, onchan
             { labelElement }
             <select
                 onBlur={onSelectBlur}
-                className="form-control"
-                id="DropdownInput"
+                className={`form-control ${className ? className : ''}`}
                 style={selectMessage.error ? inputError : value === '' ? null : inputSuccess}
                 onChange={(e) => onchange(e.target.value)}
                 value={value}
@@ -42,6 +41,7 @@ const DropdownInput = ({ options, selectMessage, setSelectMessage, value, onchan
 DropdownInput.propTypes = {
     selectMessage: PropTypes.object.isRequired,
     options: PropTypes.array.isRequired,
+    setSelectMessage: PropTypes.func,
     label: PropTypes.string,
 };
 
