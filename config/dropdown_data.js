@@ -6,4 +6,9 @@
         ];
 
 
+export let days = []
+
+for(let i = 1; i <= 31 ; i++) {
+    days.unshift({label: i + 1, value: i})
+}
 

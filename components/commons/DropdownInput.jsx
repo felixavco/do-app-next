@@ -3,7 +3,7 @@ import { isEmpty } from '../../utils/utils';
 import { inputError, inputSuccess, msgError, msgSuccess } from './messageStyles';
 
 
-const DropdownInput = ({ options, selectMessage, setSelectMessage, account_type, setAccount_type, label }) => {
+const DropdownInput = ({ options, selectMessage, setSelectMessage, value, onchange, label }) => {
     const selectOptions = options.map((e, i) => <option key={i} value={e.value}>{e.label}</option>)
 
     const onSelectBlur = (e) => {
@@ -26,13 +26,13 @@ const DropdownInput = ({ options, selectMessage, setSelectMessage, account_type,
                 onBlur={onSelectBlur}
                 className="form-control"
                 id="DropdownInput"
-                style={selectMessage.error ? inputError : account_type === '' ? null : inputSuccess}
-                onChange={(e) => setAccount_type(e.target.value)}
-                value={account_type}
+                style={selectMessage.error ? inputError : value === '' ? null : inputSuccess}
+                onChange={(e) => onchange(e.target.value)}
+                value={value}
             >
                 {selectOptions}
             </select>
-            <small className="form-text" style={selectMessage.error ? msgError : account_type === '' ? null : msgSuccess}>
+            <small className="form-text" style={selectMessage.error ? msgError : value === '' ? null : msgSuccess}>
                 {selectMessage.text}
             </small>
         </div>

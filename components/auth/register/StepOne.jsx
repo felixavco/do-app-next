@@ -83,9 +83,9 @@ const StepOne = (props) => {
                 <div className="col-12 col-md-6 col-lg-5 mt-3 mx-auto">
                     <form onSubmit={onSubmitHandler}>
                         <DropdownInput
-                            account_type={account_type}
+                            value={account_type}
                             options={account_types}
-                            setAccount_type={setAccount_type}
+                            onchange={setAccount_type}
                             setSelectMessage={setSelectMessage}
                             selectMessage={selectMessage}
                         />
