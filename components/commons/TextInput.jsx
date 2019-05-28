@@ -5,8 +5,8 @@ import { inputError, inputSuccess, msgError, msgSuccess } from './messageStyles'
 
 function TextInput({
 	value,
-	setValue,
-	message,
+	onchange,
+	message={text: '', error: false, animation: false},
 	setMessage,
 	placeholder,
 	name,
@@ -16,16 +16,8 @@ function TextInput({
 	capitalizeInput = false,
 	textArea = false
 }) {
-	// useEffect(
-	// 	() => {
-	// 		if (value.length > length.min || value.length < length.max) {
-	// 			setMessage({ text: '', error: false, animation: false });
-	// 		} else {
-	// 			setMessage({ text: lengthValErrMsg, error: true, animation: true });
-	// 		}
-	// 	},
-	// 	[value]
-	// );
+
+
 
 	const onNameBlur = () => {
 		// if (isEmpty(value)) {

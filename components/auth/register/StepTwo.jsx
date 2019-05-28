@@ -7,19 +7,22 @@ import { RadioButton } from 'primereact/radiobutton';
 import { days, months, years } from '../../../config/dropdown_data';
 const StepTwo = () => {
 
+    const defaultYear = new Date().getFullYear() - 30;
     //*State
     const [firstName, setFirstName] = useState('');
     const [middleName, setMiddleName] = useState('');
     const [lastName, setLastName] = useState('');
     const [lastName2, setLastName2] = useState('');
     const [gender, setGender] = useState('M');
-    const [day, setDay] = useState(0);
+    const [day, setDay] = useState(1);
+    const [month, setMonth] = useState(0);
+    const [year, setYear] = useState(defaultYear);
 
 
     return (
         <div className="container">
             <small>(*) Campos Requeridos</small>
-            {/* Row 1 */}
+
             <div className="row">
                 <div className="col-12 col-md-6 col-lg-3">
                     <TextInput
@@ -31,6 +34,7 @@ const StepTwo = () => {
                         name="firstName"
                         isEmptyErrMsg="campo requerido"
                         lengthValErrMsg="55"
+                        setMessage={() => console.log("TEST")}
                     />
                 </div>
                 <div className="col-12 col-md-6 col-lg-3">
@@ -43,6 +47,7 @@ const StepTwo = () => {
                         name="middleName"
                         isEmptyErrMsg="campo requerido"
                         lengthValErrMsg="55"
+                        setMessage={() => console.log("TEST")}
                     />
                 </div>
 
@@ -56,6 +61,7 @@ const StepTwo = () => {
                         name="middleName"
                         isEmptyErrMsg="campo requerido"
                         lengthValErrMsg="55"
+                        setMessage={() => console.log("TEST")}
                     />
                 </div>
 
@@ -69,11 +75,10 @@ const StepTwo = () => {
                         name="middleName"
                         isEmptyErrMsg="campo requerido"
                         lengthValErrMsg="55"
+                        setMessage={() => console.log("TEST")}
                     />
                 </div>
             </div>
-
-            {/* Row 2 */}
 
             <div className="row">
                 <div className="col-12 col-md-4 col-lg-3 mx-auto mb-3">
@@ -84,22 +89,25 @@ const StepTwo = () => {
                                 options={days()}
                                 onchange={setDay}
                                 value={day}
+                                allowEmpty={true}
                                 selectMessage={{ text: "", error: false, animation: false }}
                             />
                         </span>
                         <span className="mr-2">
                             <DropdownInput
                                 options={months()}
-                                onchange={setDay}
-                                value={day}
+                                onchange={setMonth}
+                                value={month}
+                                allowEmpty={true}
                                 selectMessage={{ text: "", error: false, animation: false }}
                             />
                         </span>
                         <span>
                             <DropdownInput
                                 options={years()}
-                                onchange={setDay}
-                                value={day}
+                                onchange={setYear}
+                                value={year}
+                                allowEmpty={true}
                                 selectMessage={{ text: "", error: false, animation: false }}
                             />
                         </span>
@@ -110,12 +118,12 @@ const StepTwo = () => {
                     <h6 className="text-center text-secondary">* Genero</h6>
                     <div className="gender-cont d-flex justify-content-center align-items-center">
                         <span className="mr-3">
-                            <RadioButton inputId="rb1" name="gender" value={gender} onChange={(e) => setGender(e.value)} />
+                            <RadioButton inputId="rb1" name="gender" value="M" onChange={(e) => setGender(e.target.value)} checked={gender === 'M'} />
                             <label htmlFor="rb1" className="p-radiobutton-label">Dr.</label>
                         </span>
                         <span>
-                            <RadioButton inputId="rb1" name="gender" value={gender} onChange={(e) => setGender(e.value)} />
-                            <label htmlFor="rb1" className="p-radiobutton-label">Dra.</label>
+                            <RadioButton inputId="rb2" name="gender" value="F" onChange={(e) => setGender(e.target.value)} checked={gender === 'F'} />
+                            <label htmlFor="rb2" className="p-radiobutton-label">Dra.</label>
                         </span>
                     </div>
                 </div>
@@ -131,6 +139,7 @@ const StepTwo = () => {
                         name="firstName"
                         isEmptyErrMsg="campo requerido"
                         lengthValErrMsg="55"
+                        setMessage={() => console.log("TEST")}
                     />
                 </div>
 
@@ -142,6 +151,8 @@ const StepTwo = () => {
                         value={day}
                         selectMessage={{ text: "", error: false, animation: false }}
                         placeholder="Especialidad"
+                        allowEmpty={true}
+                        setMessage={() => console.log("TEST")}
                     />
                 </div>
             </div>
