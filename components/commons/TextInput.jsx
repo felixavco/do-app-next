@@ -1,41 +1,70 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty, capitalize} from '../../utils/utils';
+import { isEmpty, capitalize } from '../../utils/utils';
 import { inputError, inputSuccess, msgError, msgSuccess } from './messageStyles';
 
 function TextInput({
 	value,
 	onchange,
-	message={text: '', error: false, animation: false},
+	message = { text: '', error: false, animation: false },
 	setMessage,
 	placeholder,
 	name,
-	isEmptyErrMsg,
-	lengthValErrMsg,
+	isEmptyMsg,
+	lengthMsg,
 	length,
 	capitalizeInput = false,
-	textArea = false
+	textArea = false,
+	allowEmtpy = true,
+	allowTrim = false,
+	onlyNumbers = false
 }) {
 
 
 
 	const onNameBlur = () => {
-		// if (isEmpty(value)) {
-		// 	setMessage({ text: isEmptyErrMsg, error: true, animation: true });
-		// } else if (value.length < length.min || value.length > length.max) {
-		// 	setMessage({ text: lengthValErrMsg, error: true, animation: true });
-		// } else {
-		// 	setMessage({ text: '', error: false, animation: false });
-		// }
+		if (!allowEmtpy) {
+			if (isEmpty(value)) {
+				setMessage({ text: isEmptyMsg, error: true, animation: true });
+			} else {
+				if (!isEmpty(length)) {
+					if (value.length < length.min || value.length > length.max) {
+						setMessage({ text: lengthMsg, error: true, animation: true });
+					} else {
+						setMessage({ text: '', error: false, animation: false });
+					}
+				}
+			}
+		} else {
+			if (!isEmpty(length)) {
+				if (value.length < length.min || value.length > length.max) {
+					setMessage({ text: lengthMsg, error: true, animation: true });
+				} else {
+					setMessage({ text: '', error: false, animation: false });
+				}
+			}
+		}
+
 	};
 
-	const onChangeHandler = e => {
+	const onChangeHandler = value => {
 		if (capitalizeInput) {
-			setValue(e.target.value.split(' ').map(n => capitalize(n)).join(' '));
+			onchange(value.split(' ').map(n => capitalize(n)).join(' '));
+		} else if (onlyNumbers) {
+			console.log(TEST)
 		} else {
-			setValue(e.target.value);
+			onchange(value);
 		}
 	};
+
+	let messageElement = null;
+	if (!isEmpty(message)) {
+		messageElement = (
+			<small className="form-text" style={message.error ? msgError : value === '' ? null : msgSuccess}>
+				{message.text}
+			</small>
+		)
+	}
 
 	let content;
 
@@ -48,12 +77,10 @@ function TextInput({
 					id={value}
 					value={value}
 					placeholder={placeholder}
-					onChange={e => onChangeHandler(e)}
+					onChange={e => allowTrim ? onChangeHandler(e.target.value.trim()) : onChangeHandler(e.target.value)}
 					onBlur={onNameBlur}
 				/>
-				<small className="form-text" style={message.error ? msgError : value === '' ? null : msgSuccess}>
-					{message.text}
-				</small>
+				{messageElement}
 			</div>
 		);
 	} else {
@@ -67,17 +94,16 @@ function TextInput({
 					placeholder={placeholder}
 					name={name}
 					value={value}
-					onChange={e => onChangeHandler(e)}
+					onChange={e => allowTrim ? onChangeHandler(e.target.value.trim()) : onChangeHandler(e.target.value)}
 					onBlur={onNameBlur}
 				/>
-				<small className="form-text" style={message.error ? msgError : value === '' ? null : msgSuccess}>
-					{message.text}
-				</small>
+				{messageElement}
 			</div>
 		);
 	}
 
 	return content;
+
 }
 
 TextInput.propTypes = {
@@ -87,8 +113,8 @@ TextInput.propTypes = {
 	setMessage: PropTypes.func.isRequired,
 	placeholder: PropTypes.string,
 	name: PropTypes.string.isRequired,
-	isEmptyErrMsg: PropTypes.string.isRequired,
-	lengthValErrMsg: PropTypes.string.isRequired,
+	isEmptyMsg: PropTypes.string.isRequired,
+	lengthMsg: PropTypes.string.isRequired,
 	length: PropTypes.object,
 	capitalizeInput: PropTypes.bool,
 	textArea: PropTypes.bool

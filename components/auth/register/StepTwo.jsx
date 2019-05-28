@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 //* Components
 import TextInput from '../../commons/TextInput';
+import { InputText } from 'primereact/inputtext';
 import DropdownInput from '../../commons/DropdownInput';
 import { RadioButton } from 'primereact/radiobutton';
 
@@ -10,13 +11,26 @@ const StepTwo = () => {
     const defaultYear = new Date().getFullYear() - 30;
     //*State
     const [firstName, setFirstName] = useState('');
+    const [firstNameMsg, setFirstNameMsg] = useState({})
+
     const [middleName, setMiddleName] = useState('');
+    const [middleNameMsg, setMiddleNameMsg] = useState({})
+
     const [lastName, setLastName] = useState('');
+    const [lastNameMsg, setLastNameMsg] = useState({})
+
     const [lastName2, setLastName2] = useState('');
-    const [gender, setGender] = useState('M');
+    const [lastName2Msg, setLastName2Msg] = useState({})
+
     const [day, setDay] = useState(1);
     const [month, setMonth] = useState(0);
     const [year, setYear] = useState(defaultYear);
+
+    const [gender, setGender] = useState('M');
+
+    const [jvpm, setjvpm] = useState('')
+
+
 
 
     return (
@@ -26,56 +40,64 @@ const StepTwo = () => {
             <div className="row">
                 <div className="col-12 col-md-6 col-lg-3">
                     <TextInput
+                        message={firstNameMsg}
+                        allowEmtpy={false}
                         value={firstName}
-                        message={{}}
-                        setValue={setFirstName}
-                        setMessage={{}}
+                        onchange={setFirstName}
                         placeholder="*Primer Nombre"
                         name="firstName"
-                        isEmptyErrMsg="campo requerido"
-                        lengthValErrMsg="55"
-                        setMessage={() => console.log("TEST")}
+                        capitalizeInput={true}
+                        allowTrim={true}
+                        length={{ min: 3, max: 20 }}
+                        isEmptyMsg="Este campo es requerido"
+                        lengthMsg="Entre 3 a 20 caracteres son permitidos"
+                        setMessage={setFirstNameMsg}
                     />
                 </div>
                 <div className="col-12 col-md-6 col-lg-3">
                     <TextInput
                         value={middleName}
-                        message={{}}
-                        setValue={setMiddleName}
-                        setMessage={{}}
+                        onchange={setMiddleName}
                         placeholder="Segundo Nombre"
                         name="middleName"
-                        isEmptyErrMsg="campo requerido"
-                        lengthValErrMsg="55"
-                        setMessage={() => console.log("TEST")}
+                        capitalizeInput={true}
+                        allowTrim={true}
+                        length={{ min: 0, max: 20 }}
+                        message={middleNameMsg}
+                        setMessage={setMiddleNameMsg}
+                        lengthMsg="20 caracteres maximo"
                     />
                 </div>
 
                 <div className="col-12 col-md-6 col-lg-3">
                     <TextInput
-                        value={middleName}
-                        message={{}}
-                        setValue={setMiddleName}
-                        setMessage={{}}
+                        message={lastNameMsg}
+                        allowEmtpy={false}
+                        value={lastName}
+                        onchange={setLastName}
                         placeholder="*Apellido"
-                        name="middleName"
-                        isEmptyErrMsg="campo requerido"
-                        lengthValErrMsg="55"
-                        setMessage={() => console.log("TEST")}
+                        name="lastname"
+                        capitalizeInput={true}
+                        allowTrim={true}
+                        length={{ min: 3, max: 20 }}
+                        isEmptyMsg="Este campo es requerido"
+                        lengthMsg="Entre 3 a 20 caracteres son permitidos"
+                        setMessage={setLastNameMsg}
                     />
                 </div>
 
                 <div className="col-12 col-md-6 col-lg-3">
                     <TextInput
-                        value={middleName}
-                        message={{}}
-                        setValue={setMiddleName}
-                        setMessage={{}}
-                        placeholder="Apellido Materno"
-                        name="middleName"
-                        isEmptyErrMsg="campo requerido"
-                        lengthValErrMsg="55"
-                        setMessage={() => console.log("TEST")}
+                        value={lastName2}
+                        onchange={setLastName2}
+                        setMessage={setLastName2Msg}
+                        placeholder="Segundo Apellido"
+                        name="lastname2"
+                        capitalizeInput={true}
+                        allowTrim={true}
+                        length={{ min: 0, max: 20 }}
+                        message={lastName2Msg}
+                        lengthMsg="20 caracteres maximo"
                     />
                 </div>
             </div>
@@ -130,17 +152,19 @@ const StepTwo = () => {
 
                 <div className="col-12 col-md-4 col-lg-2 mx-auto mb-3">
                     <h6 className="text-center text-secondary">* JVPM</h6>
-                    <TextInput
-                        value={firstName}
-                        message={{}}
-                        setValue={setFirstName}
-                        setMessage={{}}
-                        placeholder=""
-                        name="firstName"
-                        isEmptyErrMsg="campo requerido"
-                        lengthValErrMsg="55"
-                        setMessage={() => console.log("TEST")}
-                    />
+                    {/* <TextInput
+                        value={jvpm}
+                        onchange={setjvpm}
+                        name="jvmp"
+                    /> */}
+
+                    <div className="form-group">
+                        <InputText keyfilter="num" />
+                        <small className="form-text" style={{ color: "red" }}>
+                            This field id required
+                        </small>
+                    </div>
+
                 </div>
 
                 <div className="col-12 col-md-7 col-lg-5 mx-auto mb-3">
