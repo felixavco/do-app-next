@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { register_login } from '../../../redux/actions/authActions';
 
 
-const StepOne = (props) => {
+const RegisterForm = (props) => {
 
     //* account type State
     const [account_type, setAccount_type] = useState('');
@@ -128,4 +128,4 @@ const StepOne = (props) => {
     )
 }
 
-export default connect(null, { register_login })(StepOne)
+export default connect(null, { register_login })(RegisterForm)

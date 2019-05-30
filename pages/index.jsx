@@ -10,12 +10,13 @@ const index = (props) => {
       <Head>
         <title>My next jsx page</title>
       </Head>
+      <div className="container">
       <h1>DO APP {new Date().getFullYear()}</h1>
 
         <Link href="/register">
-            <a>Register</a>
+            <a><h2>Register</h2></a>
         </Link>
-
+    </div>
     </Layout>
   )
 }

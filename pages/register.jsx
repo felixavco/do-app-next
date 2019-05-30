@@ -3,17 +3,12 @@ import Layout from '../components/Layout';
 import './scss/register.scss';
 
 //* Steps components
-import Steps  from '../components/commons/Steps';
-import StepOne from '../components/auth/register/StepOne';
-import StepTwo from '../components/auth/register/StepTwo';
-import StepThree from '../components/auth/register/StepThree';
+import RegisterForm from '../components/auth/register/RegisterForm';
 //* Redux
 import { connect } from 'react-redux';
 
 
 const register = ({isAuthenticated}) => {
-
-    const [activeIndex, setActiveIndex] = useState(1)
 
     useEffect(() => {
         if(isAuthenticated) {
@@ -21,28 +16,12 @@ const register = ({isAuthenticated}) => {
         }
     }, [isAuthenticated])
 
-    const items = [
-        { label: 'Registro' },
-        { label: 'Informacion Personal' },
-        { label: 'Clinica' },
-    ];
 
     return (
         <Layout>
             <section className="register">
-                <div className="container-fluid">
-                    <Steps elements={items} activeElement={activeIndex} />
-                    <div style={{display: activeIndex === 0 ? 'block' : 'none'}} className="step_one">
-                        <StepOne />
-                    </div>
-
-                    <div style={{display: activeIndex === 1 ? 'block' : 'none'}} className="step_two">
-                        <StepTwo />
-                    </div>
-
-                    <div style={{display: activeIndex === 2 ? 'block' : 'none'}} className="step_three">
-                        <StepThree />
-                    </div>
+                <div className="container-fluid step_one">
+                    <RegisterForm />
                 </div>
             </section>
         </Layout>
