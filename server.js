@@ -14,7 +14,9 @@ app
         //* Serve static assets
         server.use(express.static('static'));
 
-        // server.get('/register', (req, res) => app.render(req, res, '/register'))
+        // server.get('/register', (req, res) => {
+        //     app.render(req, res, '/register')
+        // })
 
         server.get('*', (req, res) => {
             return handle(req, res);

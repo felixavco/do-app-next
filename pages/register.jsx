@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Router from 'next/router';
 import Layout from '../components/Layout';
 import './scss/register.scss';
 
@@ -12,10 +13,9 @@ const register = ({isAuthenticated}) => {
 
     useEffect(() => {
         if(isAuthenticated) {
-            setActiveIndex(1)
+            Router.push('/dashboard');
         }
     }, [isAuthenticated])
-
 
     return (
         <Layout>

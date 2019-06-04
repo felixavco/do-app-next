@@ -4,11 +4,19 @@ import { setAuthToken } from '../../utils/utils'
 import { API_URL } from '../../config/config';
 import { GET_ERRORS, SET_CURRENT_USER } from '../types'
 
+//* Set logged user
+export const setCurrentUser = (userData) => {
+    return {
+        type: SET_CURRENT_USER,
+        payload: userData
+    };
+};
+
 //* Registers the user and stores the token || Login existing users
 export const register_login = (newUser, login = false) => (dispatch) => {
     let URL = API_URL + '/api/user/register';
 
-    if(login) {
+    if (login) {
         URL = API_URL + '/api/user/login'
     }
 
@@ -22,10 +30,7 @@ export const register_login = (newUser, login = false) => (dispatch) => {
             setAuthToken(token);
             //* Decode token to get user Data
             const decodedUser = jwt_decode(token);
-            dispatch({
-                type: SET_CURRENT_USER,
-                payload: decodedUser
-            })
+            dispatch(dispatch(setCurrentUser(decodedUser)));
         })
         .catch((error) => {
             dispatch({
@@ -34,7 +39,6 @@ export const register_login = (newUser, login = false) => (dispatch) => {
             })
         })
 }
-
 
 //* Checks if an email is available
 export const isEmailAvailable = (email) => (dispatch) => {
@@ -55,3 +59,17 @@ export const isEmailAvailable = (email) => (dispatch) => {
             })
         })
 }
+
+//* Lougout user, remove token from local storage and delete user data from redux store
+export const logoutUser = () => (dispatch) => {
+	//remove token from local storage
+	localStorage.removeItem('jwtToken');
+	//remove Auth header for future request
+	setAuthToken(false);
+	// Set current user to {} this will set isAuthenticated to false
+	dispatch(setCurrentUser({}));
+};
+
+export const clearCurrentProfile = () => (dispatch) => {
+	dispatch(setCurrentUser({}));
+};
