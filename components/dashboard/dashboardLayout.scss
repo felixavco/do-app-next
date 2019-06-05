@@ -1,0 +1,11 @@
+.dashboard {
+    transition: all 250ms linear;
+    display: grid;
+    grid-template-columns: 15% 85%;
+}
+
+.dashboard.active {
+    transition: all 250ms linear;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}

@@ -40,64 +40,24 @@ const StepTwo = () => {
             <div className="row">
                 <div className="col-12 col-md-6 col-lg-3">
                     <TextInput
-                        message={firstNameMsg}
-                        allowEmtpy={false}
-                        value={firstName}
-                        onchange={setFirstName}
-                        placeholder="*Primer Nombre"
-                        name="firstName"
-                        capitalizeInput={true}
-                        allowTrim={true}
-                        length={{ min: 3, max: 20 }}
-                        isEmptyMsg="Este campo es requerido"
-                        lengthMsg="Entre 3 a 20 caracteres son permitidos"
-                        setMessage={setFirstNameMsg}
+            
                     />
                 </div>
                 <div className="col-12 col-md-6 col-lg-3">
                     <TextInput
-                        value={middleName}
-                        onchange={setMiddleName}
-                        placeholder="Segundo Nombre"
-                        name="middleName"
-                        capitalizeInput={true}
-                        allowTrim={true}
-                        length={{ min: 0, max: 20 }}
-                        message={middleNameMsg}
-                        setMessage={setMiddleNameMsg}
-                        lengthMsg="20 caracteres maximo"
+            
                     />
                 </div>
 
                 <div className="col-12 col-md-6 col-lg-3">
                     <TextInput
-                        message={lastNameMsg}
-                        allowEmtpy={false}
-                        value={lastName}
-                        onchange={setLastName}
-                        placeholder="*Apellido"
-                        name="lastname"
-                        capitalizeInput={true}
-                        allowTrim={true}
-                        length={{ min: 3, max: 20 }}
-                        isEmptyMsg="Este campo es requerido"
-                        lengthMsg="Entre 3 a 20 caracteres son permitidos"
-                        setMessage={setLastNameMsg}
+                  
                     />
                 </div>
 
                 <div className="col-12 col-md-6 col-lg-3">
                     <TextInput
-                        value={lastName2}
-                        onchange={setLastName2}
-                        setMessage={setLastName2Msg}
-                        placeholder="Segundo Apellido"
-                        name="lastname2"
-                        capitalizeInput={true}
-                        allowTrim={true}
-                        length={{ min: 0, max: 20 }}
-                        message={lastName2Msg}
-                        lengthMsg="20 caracteres maximo"
+
                     />
                 </div>
             </div>
