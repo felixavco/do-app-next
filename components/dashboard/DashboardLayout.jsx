@@ -1,5 +1,5 @@
 import Layout from '../Layout';
-import './dashboardLayout.scss';
+import './scss/dashboardLayout.scss';
 
 const DashboardLayout = ({ children }) => {
     return (

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Router from 'next/router';
 import Layout from '../components/Layout';
 import './scss/register.scss';
@@ -9,18 +9,19 @@ import RegisterForm from '../components/auth/register/RegisterForm';
 import { connect } from 'react-redux';
 
 
-const register = ({isAuthenticated}) => {
+const register = ({isAuth}) => {
 
     useEffect(() => {
-        if(isAuthenticated) {
+        if(isAuth) {
             Router.push('/dashboard');
         }
-    }, [isAuthenticated])
+    }, [isAuth])
 
     return (
         <Layout>
             <section className="register">
                 <div className="container-fluid step_one">
+                    <h1 className="display-4 text-center my-4">Crear Cuenta</h1>
                     <RegisterForm />
                 </div>
             </section>
@@ -29,7 +30,7 @@ const register = ({isAuthenticated}) => {
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
+    isAuth: state.auth.isAuthenticated,
 })
 
 export default connect(mapStateToProps, {})(register)

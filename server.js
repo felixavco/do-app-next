@@ -18,7 +18,10 @@ app
         //     app.render(req, res, '/register')
         // })
 
+
+
         server.get('*', (req, res) => {
+            console.log(req);
             return handle(req, res);
         })
 
